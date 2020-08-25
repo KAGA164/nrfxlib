@@ -3,11 +3,11 @@
 Implementing remote procedure calls
 ###################################
 
-A specific API can be used remotely if encoders and decoders are provided for it.
+A specific API can be used remotely if RPC encoders and RPC decoders are provided for it.
 On one side, there are encoders that encode parameters and send commands or events.
 On the other side, there are decoders that decode and execute a specific procedure.
 
-The main goal of nRF RPC API is to allow the creation of encoders and decoders.
+The main goal of nRF RPC API is to allow the creation of RPC encoders and RPC decoders.
 
 Encoders and decoders are grouped.
 Each group contains functions related to a single API, such as Bluetooth or entropy.
@@ -15,10 +15,10 @@ A group is created with the :c:macro:`NRF_RPC_GROUP_DEFINE` macro.
 Grouping allows you to logically divide the remote API, but also increases performance of nRF RPC.
 
 
-Encoders
-========
+RPC Encoders
+============
 
-Encoders encode commands and events into serialized packets.
+RPC encoders encode commands and events into serialized packets.
 Creating an encoder is similar for all packet types.
 The first step is the allocation of a buffer using :c:macro:`NRF_RPC_ALLOC`.
 After that, you can encode parameters directly into the buffer or use the `TinyCBOR`_ library.
@@ -107,14 +107,14 @@ The following code shows how this function might look.
 	}
 
 
-Decoders
-========
+RPC Decoders
+============
 
-Decoders are registered with macros :c:macro:`NRF_RPC_CMD_DECODER`, :c:macro:`NRF_RPC_CBOR_EVT_DECODER`, or similar, depending on what kind of decoder it is.
+RPC decoders are registered with macros :c:macro:`NRF_RPC_CMD_DECODER`, :c:macro:`NRF_RPC_CBOR_EVT_DECODER`, or similar, depending on what kind of decoder it is.
 Decoders are called automatically when a command or event with a matching ID is received.
 Command decoders must send a response.
 
-A decoder associated with the example above can be implemented in the following way:
+A RPC decoder associated with the example above can be implemented in the following way:
 
 .. code-block:: c
 
